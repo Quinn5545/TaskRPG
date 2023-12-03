@@ -17,9 +17,9 @@ class Quest(db.Model):
     completed = db.Column(db.Boolean, default=False)
 
     # relationships
-    quest_detail = db.relationship(
-        "Quest_Detail", back_populates="quest", cascade="all, delete"
-    )
+    # quest_detail = db.relationship(
+    #     "Quest_Detail", back_populates="quest", cascade="all, delete"
+    # )
 
     def to_dict(self):
         return {

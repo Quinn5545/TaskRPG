@@ -1,23 +1,23 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
+# from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
-class Leaderboard(db.Model):
-    __tablename__ = "leaderboards"
+# class Leaderboard(db.Model):
+#     __tablename__ = "leaderboards"
 
-    if environment == "production":
-        __table_args__ = {"schema": SCHEMA}
+#     if environment == "production":
+#         __table_args__ = {"schema": SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
-    character_id = db.Column(
-        db.Integer, db.ForeignKey(add_prefix_for_prod("characters.id")), nullable=False
-    )
-    high_score = db.Column(db.Integer)
+#     id = db.Column(db.Integer, primary_key=True)
+#     character_id = db.Column(
+#         db.Integer, db.ForeignKey(add_prefix_for_prod("characters.id")), nullable=False
+#     )
+#     high_score = db.Column(db.Integer)
 
-    # relationships
+#     # relationships
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "character_id": self.character_id,
-            "high_score": self.high_score,
-        }
+#     def to_dict(self):
+#         return {
+#             "id": self.id,
+#             "character_id": self.character_id,
+#             "high_score": self.high_score,
+#         }

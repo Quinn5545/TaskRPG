@@ -22,7 +22,7 @@ class Character(db.Model):
     level = db.Column(db.Integer, default=1)
 
     # relationships
-    leaderboard = db.relationship("Leaderboard", backref="character")
+    # leaderboard = db.relationship("Leaderboard", backref="character")
     quest = db.relationship("Quest", backref="character")
     task = db.relationship("Task", backref="character")
     stat = db.relationship("Stat", back_populates="character")
