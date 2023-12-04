@@ -11,8 +11,8 @@ class Stat(db.Model):
     character_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("characters.id")), nullable=False
     )
-    completed_tasks = db.Column(db.Integer)
-    completed_quests = db.Column(db.Integer)
+    completed_tasks = db.Column(db.Integer, default=0)
+    completed_quests = db.Column(db.Integer, default=0)
 
     # relationships
     character = db.relationship("Character", back_populates="stat")

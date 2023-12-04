@@ -25,12 +25,15 @@ class Character(db.Model):
     # leaderboard = db.relationship("Leaderboard", backref="character")
     quest = db.relationship("Quest", backref="character")
     task = db.relationship("Task", backref="character")
-    stat = db.relationship("Stat", back_populates="character")
+    stat = db.relationship(
+        "Stat", back_populates="character", cascade="all, delete-orphan"
+    )
 
     def to_dict(self):
         return {
             "id": self.id,
             "creator_id": self.creator_id,
+            "model_id": self.model_id,
             "name": self.name,
             "xp": self.xp,
             "level": self.level,
