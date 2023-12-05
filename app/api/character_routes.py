@@ -11,6 +11,10 @@ character_routes = Blueprint("character", __name__)
 def create_new_character():
     """creates new character"""
 
+    existing_character = Character.query.filter_by(creator_id=current_user.id).first()
+    if existing_character:
+        return jsonify({"error": "User already has a character"}), 400
+
     data = request.json
 
     if not all(key in data for key in ["name", "model_id"]):
@@ -33,12 +37,12 @@ def create_new_character():
     return new_character.to_dict()
 
 
-@character_routes.route("/<int:character_id>")
+@character_routes.route("/<int:creator_id>")
 @login_required
-def get_character_details(character_id):
-    """Gets character details by character_id"""
+def get_character_details(creator_id):
+    """Gets character details by creator_id"""
 
-    character = Character.query.get(character_id)
+    character = Character.query.filter_by(creator_id=creator_id).first()
 
     if not character:
         return jsonify({"error": "Character not found"}), 404

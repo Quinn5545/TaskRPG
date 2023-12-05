@@ -10,3 +10,6 @@ class PixelArtModel(db.Model):
 
     # relationship
     characters = db.relationship("Character", backref="pixel_art_model")
+
+    def to_dict(self):
+        return {"id": self.id, "name": self.name, "image_url": self.image_url}
