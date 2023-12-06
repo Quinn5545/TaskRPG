@@ -53,12 +53,12 @@ def get_character_details(creator_id):
     return jsonify(character.to_dict())
 
 
-@character_routes.route("/<int:character_id>/edit", methods=["PUT"])
+@character_routes.route("/<int:creator_id>/edit", methods=["PUT"])
 @login_required
-def edit_character(character_id):
-    """Edit character details based on character_id"""
+def edit_character(creator_id):
+    """Edit character details based on creator_id"""
 
-    character = Character.query.get(character_id)
+    character = Character.query.get(creator_id)
 
     if not character:
         return jsonify({"error": "Character not found"}), 404
@@ -76,10 +76,10 @@ def edit_character(character_id):
     return jsonify(character.to_dict())
 
 
-@character_routes.route("/<int:character_id>/delete", methods=["DELETE"])
+@character_routes.route("/<int:creator_id>/delete", methods=["DELETE"])
 @login_required
-def delete_character(character_id):
-    character = Character.query.get(character_id)
+def delete_character(creator_id):
+    character = Character.query.get(creator_id)
 
     if character:
         if current_user.id != character.creator_id:
@@ -87,6 +87,6 @@ def delete_character(character_id):
 
         db.session.delete(character)
         db.session.commit()
-        return {"message": "Character successfully deleted"}
+        return character.to_dict()
     else:
         return {"error": "Character not found"}, 404

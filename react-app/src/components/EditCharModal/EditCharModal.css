@@ -1,0 +1,61 @@
+/* NewCharModal.css */
+
+/* Style for the entire modal */
+.EditCharModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Style for the form container */
+.EditCharModal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Style for the input field */
+.EditCharModal form label {
+  margin-bottom: 10px;
+}
+
+.EditCharModal form input {
+  padding: 5px;
+  margin-top: 5px;
+}
+
+/* Style for the character models container */
+.EditCharModal form div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+/* Style for each character model item */
+.EditCharModal form .model-item {
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.EditCharModal form .model-item:hover {
+  transform: scale(1.1);
+}
+
+.EditCharModal form .model-item img {
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.EditCharModal form .model-item p {
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Style for the selected character model */
+.EditCharModal form .model-item.selected {
+  border: 2px solid #4285f4; /* Change the color as needed */
+}

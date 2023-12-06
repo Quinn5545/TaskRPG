@@ -1,0 +1,76 @@
+/* DeleteCharModal.css */
+
+/* Style for the entire modal */
+.DeleteCharModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center vertically */
+}
+
+/* Style for the container */
+.DeleteCharModal div {
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the title */
+.delete-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+/* Style for the delete message */
+.delete-message {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Style for the character image */
+.delete-char-img {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.delete-char-img-box {
+  display: flex;
+  justify-content: center;
+}
+
+.delete-modal-box {
+  width: 400px;
+  height: 400px;
+}
+
+/* Style for the delete button */
+.delete-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #e74c3c; /* Adjust the color as needed */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.del-button-box {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 15px;
+}
+
+.delete-button:hover {
+  background-color: #c0392b; /* Adjust the hover color as needed */
+}

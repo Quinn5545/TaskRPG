@@ -1,0 +1,54 @@
+.character-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button,
+.delete-button,
+.new-char-modal-button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-button-box {
+  padding-top: 10px;
+}
+
+.model-img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.characters-level,
+.characters-xp {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.new-character-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.newCharTitle {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.new-char-modal-button {
+  padding: 15px 20px;
+  font-size: 16px;
+}
