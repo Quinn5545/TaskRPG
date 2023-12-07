@@ -23,7 +23,7 @@ class Task(db.Model):
     completed = db.Column(db.Boolean, default=False)
 
     # relationships
-    quest = db.relationship("Quest", backref="task")
+    # quest = db.relationship("Quest", backref="task")
 
     def to_dict(self):
         return {
