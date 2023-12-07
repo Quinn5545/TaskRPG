@@ -38,7 +38,6 @@ def create_new_task():
 
         new_task = Task(
             character_id=current_user.id,
-            quest_id=None,
             name=data.get("name"),
             category=data.get("category"),
             description=data.get("description"),
@@ -97,7 +96,6 @@ def edit_task(task_id):
         due_date = datetime.strptime(due_date_str, "%Y-%m-%d").date()
 
         task.character_id = current_user.id
-        task.quest_id = data.get("quest_id")
         task.name = data.get("name")
         task.category = data.get("category")
         task.description = data.get("description")

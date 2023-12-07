@@ -20,9 +20,8 @@ export default function Landing() {
             <h2>TaskRPG - Your Ultimate Task Management Adventure</h2>
             <p>
               Embark on a journey of productivity and self-improvement with
-              TaskRPG. Complete tasks, conquer quests, and level up your
-              character as you achieve your goals. Turn your to-do list into an
-              epic adventure!
+              TaskRPG. Complete tasks and level up your character as you achieve
+              your goals. Turn your to-do list into an epic adventure!
             </p>
           </section>
           <section className="features-section">
@@ -30,7 +29,6 @@ export default function Landing() {
             <ul>
               <li>Manage your tasks with a gamified approach</li>
               <li>Create characters and level up based on your achievements</li>
-              <li>Embark on quests to earn rewards</li>
             </ul>
           </section>
           <section className="get-started-section">

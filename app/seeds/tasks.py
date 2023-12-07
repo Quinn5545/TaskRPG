@@ -6,7 +6,6 @@ from datetime import datetime
 def seed_tasks():
     demo_task = Task(
         character_id=1,
-        # quest_id=1,
         name="Demo Task 1",
         category="fitness",
         description="This is the first demo task.",
@@ -17,7 +16,6 @@ def seed_tasks():
     )
     marnie_task = Task(
         character_id=2,
-        # quest_id=2,
         name="Demo Task 2",
         category="chores",
         description="This is the second demo task.",
@@ -28,7 +26,6 @@ def seed_tasks():
     )
     bobbie_task = Task(
         character_id=3,
-        # quest_id=3,
         name="Demo Task 3",
         category="work",
         description="This is the third demo task.",

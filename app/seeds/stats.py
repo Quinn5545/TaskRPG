@@ -3,9 +3,9 @@ from sqlalchemy.sql import text
 
 
 def seed_stats():
-    demo_stats = Stat(character_id=1, completed_tasks=2, completed_quests=1)
-    marnie_stats = Stat(character_id=2, completed_tasks=3, completed_quests=2)
-    bobbie_stats = Stat(character_id=3, completed_tasks=4, completed_quests=3)
+    demo_stats = Stat(character_id=1, completed_tasks=2)
+    marnie_stats = Stat(character_id=2, completed_tasks=3)
+    bobbie_stats = Stat(character_id=3, completed_tasks=4)
 
     db.session.add_all([demo_stats, marnie_stats, bobbie_stats])
     db.session.commit()
