@@ -2,6 +2,7 @@ const GET_CHARACTER = "characters/getCharacter";
 const CREATE_NEW_CHARACTER = "characters/newCharacter";
 const EDIT_CHARACTER = "characters/editCharacter";
 const DELETE_CHARACTER = "characters/deleteCharacter";
+const ADD_CHARACTER_XP = "characters/addCharacterXp";
 
 // Action Creator
 const getCharacter = (character) => {
@@ -28,6 +29,13 @@ const editCharacter = (character) => {
 const deleteCharacter = (creator_id) => {
   return {
     type: DELETE_CHARACTER,
+    creator_id,
+  };
+};
+
+const addCharacterXp = (creator_id) => {
+  return {
+    type: ADD_CHARACTER_XP,
     creator_id,
   };
 };
@@ -60,7 +68,7 @@ export const createCharacterThunk = (character_data) => async (dispatch) => {
 
     if (res.ok) {
       const data = await res.json();
-      console.log("dataaaaaaaaaa=====>", data);
+      // console.log("data=====>", data);
       dispatch(newCharacter(data));
       return data;
     }
@@ -105,9 +113,28 @@ export const deleteCharacterThunk = (creator_id) => async (dispatch) => {
   }
 };
 
+export const addCharacterXpThunk =
+  (creator_id, xp_data) => async (dispatch) => {
+    try {
+      const res = await fetch(`/api/character/${creator_id}/xp_add`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(xp_data),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log("store data------>", data);
+        await dispatch(addCharacterXp(data));
+        return data;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 // Reducer
 const characterReducer = (state = {}, action) => {
-  const charAfterChange = { ...state };
   switch (action.type) {
     case GET_CHARACTER: {
       const newState = { ...state, ...action.character };
@@ -120,8 +147,12 @@ const characterReducer = (state = {}, action) => {
     case EDIT_CHARACTER: {
       return { ...state, ...action.character };
     }
+    case ADD_CHARACTER_XP: {
+      return { ...state, ...action.character };
+    }
     case DELETE_CHARACTER:
       return {};
+
     default:
       return state;
   }

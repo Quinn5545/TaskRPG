@@ -90,3 +90,80 @@ def delete_character(creator_id):
         return character.to_dict()
     else:
         return {"error": "Character not found"}, 404
+
+
+@character_routes.route("/<int:creator_id>/xp_add", methods=["PUT"])
+@login_required
+def add_xp_character(creator_id):
+    """Add XP to character"""
+
+    character = Character.query.get(creator_id)
+
+    if not character:
+        return jsonify({"error": "Character not found"}), 404
+
+    if current_user.id != character.creator_id:
+        return jsonify({"error": "User not authorized"}), 403
+
+    data = request.json
+    # print(data)
+
+    try:
+        xp_to_add = int(data.get("xp", 0))
+    except ValueError:
+        return jsonify({"error": "Invalid XP value"}), 400
+
+    if xp_to_add < 0:
+        return jsonify({"error": "XP to add must be non-negative"}), 400
+
+    character.xp += xp_to_add
+
+    level_threshold = 10
+    while character.xp >= level_threshold:
+        character.xp -= level_threshold
+        character.level += 1
+        level_threshold += 10
+
+    db.session.commit()
+
+    return jsonify(character.to_dict())
+
+
+# @character_routes.route("/<int:character_id>/xp_subtract", methods=["PUT"])
+# @login_required
+# def subtract_xp_character(character_id):
+#     """Subtract XP from character"""
+
+#     character = Character.query.get(character_id)
+
+#     if not character:
+#         return jsonify({"error": "Character not found"}), 404
+
+#     if current_user.id != character.creator_id:
+#         return jsonify({"error": "User not authorized"}), 403
+
+#     data = request.json
+
+#     try:
+#         xp_to_subtract = int(data.get("xp", 0))
+#     except ValueError:
+#         return jsonify({"error": "Invalid XP value"}), 400
+
+#     if xp_to_subtract < 0:
+#         return jsonify({"error": "XP to subtract must be non-negative"}), 400
+
+#     if xp_to_subtract > character.xp:
+#         return jsonify({"error": "Cannot subtract more XP than character has"}), 400
+
+#     character.xp -= xp_to_subtract
+
+#     # Update level every 10 XP lost
+#     level_threshold = 10
+#     while character.xp < 0:
+#         character.xp += level_threshold
+#         character.level -= 1
+#         level_threshold += 10
+
+#     db.session.commit()
+
+#     return jsonify(character.to_dict())

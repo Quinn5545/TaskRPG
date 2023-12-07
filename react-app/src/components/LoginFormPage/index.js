@@ -18,10 +18,13 @@ function LoginFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
+
+    if (data && data.errors) {
+      setErrors(data.errors);
+    } else {
+      // If login is successful, redirect to the dashboard
+      history.push("/dashboard");
     }
-    history.push("/dashboard");
   };
 
   return (

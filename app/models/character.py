@@ -24,7 +24,7 @@ class Character(db.Model):
     # relationships
     # leaderboard = db.relationship("Leaderboard", backref="character")
     quest = db.relationship("Quest", backref="character")
-    task = db.relationship("Task", backref="character")
+    task = db.relationship("Task", backref="character", cascade="all, delete-orphan")
     stat = db.relationship(
         "Stat", back_populates="character", cascade="all, delete-orphan"
     )

@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import session from "./session";
 import characterReducer from "./character";
 import modelsReducer from "./models";
+import tasksReducer from "./tasks";
 
 const rootReducer = combineReducers({
   session,
   characters: characterReducer,
   models: modelsReducer,
+  tasks: tasksReducer,
 });
 
 let enhancer;

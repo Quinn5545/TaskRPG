@@ -30,7 +30,7 @@ def seed():
         undo_pixel_art_models()
         undo_characters()
         # undo_leaderboards()  # Call the undo function for leaderboard
-        undo_quests()  # Call the undo function for quest
+        # undo_quests()  # Call the undo function for quest
         # undo_quest_details()  # Call the undo function for quest_details
         undo_stats()
     seed_users()
@@ -38,7 +38,7 @@ def seed():
     seed_pixel_art_models()
     seed_characters()
     # seed_leaderboards()  # Call the seed function for leaderboard
-    seed_quests()  # Call the seed function for quest
+    # seed_quests()  # Call the seed function for quest
     # seed_quest_details()  # Call the seed function for quest_details
     seed_stats()
 
@@ -57,9 +57,9 @@ def undo():
         # db.session.execute(
         #     f"TRUNCATE table {SCHEMA}.leaderboard RESTART IDENTITY CASCADE;"
         # )  # Add truncate for leaderboard
-        db.session.execute(
-            f"TRUNCATE table {SCHEMA}.quests RESTART IDENTITY CASCADE;"
-        )  # Add truncate for quests
+        # db.session.execute(
+        #     f"TRUNCATE table {SCHEMA}.quests RESTART IDENTITY CASCADE;"
+        # )  # Add truncate for quests
         # db.session.execute(
         #     f"TRUNCATE table {SCHEMA}.quest_details RESTART IDENTITY CASCADE;"
         # )  # Add truncate for quest_details
@@ -70,7 +70,7 @@ def undo():
         db.session.execute("DELETE FROM pixel_art_models")
         db.session.execute("DELETE FROM characters")
         # db.session.execute("DELETE FROM leaderboard")  # Add delete for leaderboard
-        db.session.execute("DELETE FROM quests")  # Add delete for quests
+        # db.session.execute("DELETE FROM quests")  # Add delete for quests
         # db.session.execute("DELETE FROM quest_details")  # Add delete for quest_details
         db.session.execute("DELETE FROM stats")
         db.session.execute("DELETE FROM users")

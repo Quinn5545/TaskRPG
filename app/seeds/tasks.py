@@ -6,7 +6,7 @@ from datetime import datetime
 def seed_tasks():
     demo_task = Task(
         character_id=1,
-        quest_id=1,
+        # quest_id=1,
         name="Demo Task 1",
         category="fitness",
         description="This is the first demo task.",

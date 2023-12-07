@@ -1,0 +1,25 @@
+.tasks-container {
+  margin: 20px;
+}
+
+.tasks-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.task-details-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.task-details-list li {
+  margin-bottom: 5px;
+}

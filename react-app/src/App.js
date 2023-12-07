@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Landing from "./components/Landing";
 import Dashboard from "./components/Dashboard";
 import Character from "./components/Character";
+import Tasks from "./components/Tasks";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route exact path="/character/:creator_id">
             <Character />
+          </Route>
+          <Route exact path="/tasks">
+            <Tasks />
           </Route>
           <Route exact path="/">
             <Landing />

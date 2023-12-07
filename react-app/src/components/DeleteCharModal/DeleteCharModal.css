@@ -49,8 +49,8 @@
 }
 
 .delete-modal-box {
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
 }
 
 /* Style for the delete button */
@@ -68,9 +68,15 @@
 .del-button-box {
   display: flex;
   justify-content: space-evenly;
-  padding-top: 15px;
+  padding-top: 20px;
 }
 
 .delete-button:hover {
   background-color: #c0392b; /* Adjust the hover color as needed */
+}
+
+.warning-del-char {
+  display: flex;
+  justify-content: center;
+  color: red;
 }

@@ -39,6 +39,10 @@ export default function DeleteCharModal() {
         <div className="delete-char-img-box">
           <img className="delete-char-img" src={currentModel.image_url} />
         </div>
+        <div className="warning-del-char">Warning!</div>
+        <div className="warning-del-char">
+          This will delete all tasks associated with this character!
+        </div>
         <div className="del-button-box">
           <button className="delete-button" onClick={handleSubmit}>
             Delete

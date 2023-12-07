@@ -59,6 +59,11 @@ ul {
   background-color: #2980b9;
 }
 
+.button-box {
+  display: flex;
+  justify-content: space-around;
+}
+
 footer {
   margin-top: 20px;
   text-align: center;
