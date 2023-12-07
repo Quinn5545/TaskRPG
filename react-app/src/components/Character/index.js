@@ -57,7 +57,7 @@ export default function Character() {
             <div className="characters-level">
               Character Level: {characters.level}
             </div>
-            <div className="characters-xp">XP: {characters.xp}</div>
+            <div className="characters-xp">XP: {characters.xp}/10</div>
             <div className="delete-button-box">
               <OpenModalButton
                 className="delete-button"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -7,16 +7,18 @@ import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
 import * as bootstrap from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { getTasksThunk } from "../../store/tasks";
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
+  const allTasks = useSelector((state) => Object.values(state.tasks));
   const history = useHistory();
-  if (!sessionUser) {
-    history.push("/");
-    return null;
-  }
+  const dispatch = useDispatch();
+  // console.log(allTasks.filter((task) => !task.completed));
+
+  const filteredTasks = allTasks.filter((task) => !task.completed);
 
   const events = [
     {
@@ -30,6 +32,26 @@ export default function Dashboard() {
       start: "2023-12-20",
     },
   ];
+
+  filteredTasks.forEach((task) => {
+    const newTaskObj = {
+      title: task.name,
+      content: task.description,
+      start: task.due_date,
+    };
+    events.push(newTaskObj);
+  });
+
+  // console.log(events);
+  useEffect(() => {
+    dispatch(getTasksThunk());
+  }, [dispatch]);
+
+  if (!sessionUser) {
+    history.push("/");
+    return null;
+  }
+
   return (
     <div>
       <div className="dash-char-link">
