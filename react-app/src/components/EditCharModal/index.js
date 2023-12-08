@@ -64,18 +64,23 @@ export default function EditCharModal() {
                   src={model.image_url}
                   alt={`Model ${model.id}`}
                 />
-                <p className="edit-model-name">{model.name}</p>
+                {/* <p className="edit-model-name">{model.name}</p> */}
               </div>
             ))}
           </div>
         </div>
-        <button
-          className="edit-char-submit-button"
-          disabled={!name || !selectedModel}
-          type="submit"
-        >
-          Save Edits
-        </button>
+        <div className="tabs-container">
+          <button type="button" onClick={closeModal}>
+            Cancel Edits
+          </button>
+          <button
+            className="edit-char-submit-button"
+            disabled={!name || !selectedModel}
+            type="submit"
+          >
+            Save Edits
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -121,10 +121,12 @@ export const addCharacterXpThunk =
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(xp_data),
       });
+      // console.log("creator_id------>", creator_id);
+      // console.log("store res------>", res);
 
       if (res.ok) {
         const data = await res.json();
-        console.log("store data------>", data);
+        // console.log("store data------>", data);
         await dispatch(addCharacterXp(data));
         return data;
       }

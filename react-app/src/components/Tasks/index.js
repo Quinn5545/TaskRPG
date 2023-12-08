@@ -8,6 +8,7 @@ import NewTaskModal from "../NewTaskModal";
 import EditTaskModal from "../EditTaskModal";
 import { getCharacterThunk } from "../../store/character";
 import DeleteTaskModal from "../DeleteTaskModal";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Tasks() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -15,6 +16,9 @@ export default function Tasks() {
   const allTasks = useSelector((state) => Object.values(state.tasks));
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("incomplete");
+  const character = useSelector((state) => state.characters);
+
+  // console.log("char", Object.keys(character).length);
   // console.log(allTasks.length);
   useEffect(() => {
     dispatch(getTasksThunk());
@@ -33,71 +37,94 @@ export default function Tasks() {
 
   return (
     <div className="tasks-container">
-      {activeTab == "incomplete" ? (
-        <h1>Tasks in Progress</h1>
+      {!Object.keys(character).length ? (
+        <div className="no-char-box">
+          <h2 className="no-char-title">
+            Please Create a Character Before Creating a Task!
+          </h2>
+          <div>
+            <div className="dash-char-link">
+              <NavLink to={`/character/${sessionUser.id}`}>Character</NavLink>
+            </div>
+          </div>
+        </div>
       ) : (
-        <h1>Completed Tasks</h1>
-      )}
-      <div className="tabs-container">
-        <button onClick={() => setActiveTab("incomplete")}>
-          Incomplete Tasks
-        </button>
-        <button onClick={() => setActiveTab("completed")}>
-          Completed Tasks
-        </button>
-      </div>
-      <OpenModalButton
-        buttonText={"Create New Task"}
-        modalComponent={<NewTaskModal onSuccess={handleCreateTask} />}
-      ></OpenModalButton>
-      {filteredTasks.length === 0 ? (
-        <p>
-          No {activeTab === "incomplete" ? "incomplete" : "completed"} tasks.
-        </p>
-      ) : (
-        <ul className="tasks-list">
-          {filteredTasks.map((task) => (
-            <li key={task.id} className="task-item">
-              <strong>Name:</strong> {task.name}
-              <ul className="task-details-list">
-                <li>
-                  <strong>Category:</strong> {task.category}
+        <>
+          {activeTab === "incomplete" ? (
+            <h1>Tasks in Progress</h1>
+          ) : (
+            <h1>Completed Tasks</h1>
+          )}
+          <div className="tabs-container">
+            <button onClick={() => setActiveTab("incomplete")}>
+              Incomplete Tasks
+            </button>
+            <button onClick={() => setActiveTab("completed")}>
+              Completed Tasks
+            </button>
+          </div>
+          <div className="tabs-container">
+            <OpenModalButton
+              buttonText={"Create New Task"}
+              modalComponent={<NewTaskModal onSuccess={handleCreateTask} />}
+            ></OpenModalButton>
+          </div>
+          {filteredTasks.length === 0 ? (
+            <p>
+              No {activeTab === "incomplete" ? "incomplete" : "completed"}{" "}
+              tasks.
+            </p>
+          ) : (
+            <ul className="tasks-list">
+              {filteredTasks.map((task) => (
+                <li key={task.id} className="task-item">
+                  <strong>Name:</strong> {task.name}
+                  <ul className="task-details-list">
+                    <li>
+                      <strong>Category:</strong> {task.category}
+                    </li>
+                    <li>
+                      <strong>Description:</strong> {task.description}
+                    </li>
+                    <li>
+                      <strong>Due Date:</strong> {task.due_date}
+                    </li>
+                    {/* <li>
+                      <strong>Points:</strong> {task.points}
+                    </li> */}
+                    <li>
+                      <strong>Priority:</strong> {task.priority}
+                    </li>
+                    <li>
+                      <strong>Completed:</strong>{" "}
+                      {task.completed ? "Yes" : "No"}
+                    </li>
+                    {task.completed ? (
+                      <div>
+                        <strong>XP earned:</strong> {task.priority}
+                      </div>
+                    ) : (
+                      <>
+                        <div className="tabs-container">
+                          <OpenModalButton
+                            buttonText={"Edit Task"}
+                            modalComponent={<EditTaskModal task_id={task.id} />}
+                          ></OpenModalButton>
+                          <OpenModalButton
+                            buttonText={"Delete Task"}
+                            modalComponent={
+                              <DeleteTaskModal task_id={task.id} />
+                            }
+                          ></OpenModalButton>
+                        </div>
+                      </>
+                    )}
+                  </ul>
                 </li>
-                <li>
-                  <strong>Description:</strong> {task.description}
-                </li>
-                <li>
-                  <strong>Due Date:</strong> {task.due_date}
-                </li>
-                {/* <li>
-                <strong>Points:</strong> {task.points}
-              </li> */}
-                <li>
-                  <strong>Priority:</strong> {task.priority}
-                </li>
-                <li>
-                  <strong>Completed:</strong> {task.completed ? "Yes" : "No"}
-                </li>
-                {task.completed ? (
-                  <div>
-                    <strong>XP earned:</strong> {task.priority}
-                  </div>
-                ) : (
-                  <>
-                    <OpenModalButton
-                      buttonText={"Edit Task"}
-                      modalComponent={<EditTaskModal task_id={task.id} />}
-                    ></OpenModalButton>
-                    <OpenModalButton
-                      buttonText={"Delete Task"}
-                      modalComponent={<DeleteTaskModal task_id={task.id} />}
-                    ></OpenModalButton>
-                  </>
-                )}
-              </ul>
-            </li>
-          ))}
-        </ul>
+              ))}
+            </ul>
+          )}
+        </>
       )}
     </div>
   );

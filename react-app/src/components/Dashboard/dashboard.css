@@ -5,3 +5,38 @@
 a {
   color: #212529 !important;
 }
+
+.dashboard-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 20%;
+  background-color: #f8f9fa; /* Set your desired background color */
+  padding: 20px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.dash-char-link a,
+.dash-task-link a {
+  display: block;
+  margin-bottom: 15px;
+  padding: 10px;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dash-char-link a:hover,
+.dash-task-link a:hover {
+  background-color: #007bff;
+  color: white !important;
+}

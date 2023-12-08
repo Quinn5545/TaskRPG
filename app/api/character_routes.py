@@ -58,7 +58,7 @@ def get_character_details(creator_id):
 def edit_character(creator_id):
     """Edit character details based on creator_id"""
 
-    character = Character.query.get(creator_id)
+    character = Character.query.filter_by(creator_id=creator_id).first()
 
     if not character:
         return jsonify({"error": "Character not found"}), 404
@@ -79,7 +79,7 @@ def edit_character(creator_id):
 @character_routes.route("/<int:creator_id>/delete", methods=["DELETE"])
 @login_required
 def delete_character(creator_id):
-    character = Character.query.get(creator_id)
+    character = Character.query.filter_by(creator_id=creator_id).first()
 
     if character:
         if current_user.id != character.creator_id:
@@ -97,7 +97,9 @@ def delete_character(creator_id):
 def add_xp_character(creator_id):
     """Add XP to character"""
 
-    character = Character.query.get(creator_id)
+    character = Character.query.filter_by(creator_id=creator_id).first()
+
+    # print("char---->", character)
 
     if not character:
         return jsonify({"error": "Character not found"}), 404
@@ -106,7 +108,7 @@ def add_xp_character(creator_id):
         return jsonify({"error": "User not authorized"}), 403
 
     data = request.json
-    # print(data)
+    # print("data----->", data)
 
     try:
         xp_to_add = int(data.get("xp", 0))

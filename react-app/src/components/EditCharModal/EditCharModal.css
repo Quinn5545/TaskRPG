@@ -44,8 +44,8 @@
 }
 
 .EditCharModal form .model-item img {
-  width: 100px; /* Adjust the width as needed */
-  height: 100px; /* Adjust the height as needed */
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -57,5 +57,6 @@
 
 /* Style for the selected character model */
 .EditCharModal form .model-item.selected {
-  border: 2px solid #4285f4; /* Change the color as needed */
+  border: 2px solid #4285f4;
+  border-radius: 50%;
 }

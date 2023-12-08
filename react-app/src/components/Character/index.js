@@ -42,11 +42,6 @@ export default function Character() {
     <div className="character-container">
       {specificModel && Object.keys(characters).length > 0 ? (
         <>
-          <OpenModalButton
-            className="edit-button"
-            buttonText="Edit Character"
-            modalComponent={<EditCharModal />}
-          />
           <h1>{characters?.name}</h1>
           <img
             className="model-img"
@@ -58,7 +53,12 @@ export default function Character() {
               Character Level: {characters.level}
             </div>
             <div className="characters-xp">XP: {characters.xp}/10</div>
-            <div className="delete-button-box">
+            <div className="tabs-container">
+              <OpenModalButton
+                className="edit-button"
+                buttonText="Edit Character"
+                modalComponent={<EditCharModal />}
+              />
               <OpenModalButton
                 className="delete-button"
                 buttonText="Delete Character"
@@ -72,11 +72,13 @@ export default function Character() {
           <div className="newCharTitle">
             You Don't Have a Character Yet! Create One to Start Your Journey!
           </div>
-          <OpenModalButton
-            className="new-char-modal-button"
-            buttonText="Create New Character!"
-            modalComponent={<NewCharModal />}
-          />
+          <div className="tabs-container">
+            <OpenModalButton
+              className="new-char-modal-button"
+              buttonText="Create New Character!"
+              modalComponent={<NewCharModal />}
+            />
+          </div>
         </div>
       )}
     </div>

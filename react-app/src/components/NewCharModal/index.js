@@ -23,7 +23,7 @@ export default function NewCharModal() {
 
   return (
     <div className="NewCharModal">
-      <h2>Create a New Character</h2>
+      <h2 className="new-char-title">Create a New Character</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Character Name:
@@ -45,15 +45,20 @@ export default function NewCharModal() {
                 }`}
                 onClick={() => setSelectedModel(model)}
               >
-                <p>{model.name}</p>
+                {/* <p>{model.name}</p> */}
                 <img src={model.image_url} alt={`Model ${model.id}`} />
               </div>
             ))}
           </div>
         </div>
-        <button disabled={!name || !selectedModel} type="submit">
-          Create Character
-        </button>
+        <div className="tabs-container">
+          <button type="button" onClick={closeModal}>
+            Cancel
+          </button>
+          <button disabled={!name || !selectedModel} type="submit">
+            Create Character
+          </button>
+        </div>
       </form>
     </div>
   );

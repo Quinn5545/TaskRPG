@@ -35,7 +35,11 @@
 .characters-level,
 .characters-xp {
   margin-top: 10px;
+
   font-weight: bold;
+}
+.characters-xp {
+  margin-bottom: 10px;
 }
 
 .new-character-section {
