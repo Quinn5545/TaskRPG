@@ -23,7 +23,7 @@ class Character(db.Model):
 
     # relationships
     # leaderboard = db.relationship("Leaderboard", backref="character")
-    # pixel_art_model = db.relationship("PixelArtModel", backref="characters")
+    pixel_art_model = db.relationship("PixelArtModel", back_populates="characters")
     task = db.relationship("Task", backref="character", cascade="all, delete-orphan")
     stat = db.relationship(
         "Stat", back_populates="character", cascade="all, delete-orphan"
