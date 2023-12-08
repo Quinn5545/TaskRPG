@@ -17,15 +17,15 @@ seed_commands = AppGroup("seed")
 def seed():
     if environment == "production":
         undo_users()
-        undo_tasks()
         undo_pixel_art_models()
         undo_characters()
+        undo_tasks()
         # undo_leaderboards()  # Call the undo function for leaderboard
         undo_stats()
     seed_users()
-    seed_tasks()
     seed_pixel_art_models()
     seed_characters()
+    seed_tasks()
     # seed_leaderboards()  # Call the seed function for leaderboard
     seed_stats()
 
