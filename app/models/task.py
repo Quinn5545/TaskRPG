@@ -20,7 +20,7 @@ class Task(db.Model):
     completed = db.Column(db.Boolean, default=False)
 
     # relationships
-    
+    character = db.relationship("Character", back_populates="task")
 
     def to_dict(self):
         return {
