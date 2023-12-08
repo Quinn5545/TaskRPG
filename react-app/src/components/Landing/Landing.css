@@ -36,11 +36,11 @@ ul {
   text-align: center;
 }
 
-.cta-buttons {
+/* .cta-buttons {
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
-}
+} */
 
 .signup-button,
 .login-button {

@@ -24,20 +24,13 @@ export default function Landing() {
               your goals. Turn your to-do list into an epic adventure!
             </p>
           </section>
-          <section className="features-section">
-            <h2>Key Features</h2>
-            <ul>
-              <li>Manage your tasks with a gamified approach</li>
-              <li>Create characters and level up based on your achievements</li>
-            </ul>
-          </section>
           <section className="get-started-section">
             <h2>Get Started</h2>
             <p>
               Ready to start your TaskRPG journey? Sign up or log in to begin
               your adventure and transform the way you tackle tasks.
             </p>
-            <div className="cta-buttons">
+            <div className="tabs-container">
               <OpenModalButton
                 className="signup-button"
                 buttonText={"Sign Up"}

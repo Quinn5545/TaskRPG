@@ -24,6 +24,11 @@ function LoginFormModal() {
     }
   };
 
+  const loginDemo = () => {
+    setEmail("demo@aa.io");
+    setPassword("password");
+  };
+
   return (
     <div className="login-form-container">
       <h1 className="login-form-title">Log In</h1>
@@ -56,6 +61,12 @@ function LoginFormModal() {
         <button type="submit" className="login-form-button">
           Log In
         </button>
+
+        <div className="login-modal-delete-button-box">
+          <button className="delete-LM-form-button" to="#" onClick={loginDemo}>
+            Demo User
+          </button>
+        </div>
       </form>
     </div>
   );

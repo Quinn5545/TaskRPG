@@ -46,3 +46,21 @@
 .login-form-button:hover {
   background-color: #0056b3;
 }
+
+.login-modal-delete-button-box {
+  margin-top: 15px;
+}
+
+.delete-LM-form-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #7c2aff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-LM-form-button:hover {
+  background-color: #5f1fc5;
+}

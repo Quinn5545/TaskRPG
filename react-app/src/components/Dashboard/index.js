@@ -37,10 +37,10 @@ export default function Dashboard() {
   return (
     <div className="dashboard-container">
       <div className="sidebar">
-        <div className="dash-char-link">
+        <div className="dashboard-char-link">
           <NavLink to={`/character/${sessionUser.id}`}>Character</NavLink>
         </div>
-        <div className="dash-task-link">
+        <div className="dashboard-task-link">
           <NavLink to={`/tasks`}>Tasks</NavLink>
         </div>
       </div>

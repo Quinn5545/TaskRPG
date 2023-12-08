@@ -21,8 +21,8 @@ a {
   padding: 20px;
 }
 
-.dash-char-link a,
-.dash-task-link a {
+.dashboard-char-link a,
+.dashboard-task-link a {
   display: block;
   margin-bottom: 15px;
   padding: 10px;
@@ -35,8 +35,8 @@ a {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.dash-char-link a:hover,
-.dash-task-link a:hover {
+.dashboard-char-link a:hover,
+.dashboard-task-link a:hover {
   background-color: #007bff;
   color: white !important;
 }
