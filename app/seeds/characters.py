@@ -1,4 +1,5 @@
-from app.models import db, Character, PixelArtModel
+from app.models import db, Character, PixelArtModel, SCHEMA, environment
+from sqlalchemy.sql import text
 
 
 def seed_characters():
@@ -18,5 +19,10 @@ def seed_characters():
 
 # Undo the seed operation
 def undo_characters():
-    db.session.execute("DELETE FROM characters")
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.characters RESTART IDENTITY CASCADE;"
+        )
+    else:
+        db.session.execute(text("DELETE FROM characters"))
     db.session.commit()
