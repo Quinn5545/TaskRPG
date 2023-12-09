@@ -7,13 +7,13 @@ from flask_login import login_required, current_user
 task_routes = Blueprint("tasks", __name__)
 
 
-@task_routes.route("")
+@task_routes.route("/<int:character_id>")
 @login_required
-def get_all_tasks():
+def get_all_tasks(character_id):
     """Gets all tasks"""
     try:
         # print("-=-=-=-==-=->", current_user.id)
-        tasks = Task.query.filter_by(character_id=current_user.id).all()
+        tasks = Task.query.filter_by(character_id=character_id).all()
 
         tasks_list = [task.to_dict() for task in tasks]
 
@@ -37,7 +37,7 @@ def create_new_task():
         due_date = datetime.strptime(due_date_str, "%Y-%m-%d").date()
 
         new_task = Task(
-            character_id=current_user.id,
+            character_id=data.get("character_id"),
             name=data.get("name"),
             category=data.get("category"),
             description=data.get("description"),
@@ -67,8 +67,8 @@ def get_task_details(task_id):
         if not task:
             return jsonify({"error": "Task not found"}), 404
 
-        if current_user.id != task.character_id:
-            return jsonify({"error": "User not authorized"}), 403
+        # if current_user.id != task.character_id:
+        #     return jsonify({"error": "User not authorized"}), 403
 
         return jsonify(task.to_dict())
 
@@ -87,15 +87,15 @@ def edit_task(task_id):
         if not task:
             return jsonify({"error": "Task not found"}), 404
 
-        if current_user.id != task.character_id:
-            return jsonify({"error": "User not authorized"}), 403
+        # if current_user.id != task.character_id:
+        #     return jsonify({"error": "User not authorized"}), 403
 
         data = request.json
 
         due_date_str = data.get("due_date")
         due_date = datetime.strptime(due_date_str, "%Y-%m-%d").date()
 
-        task.character_id = current_user.id
+        task.character_id = data.get("character_id")
         task.name = data.get("name")
         task.category = data.get("category")
         task.description = data.get("description")
@@ -121,9 +121,9 @@ def delete_task(task_id):
         if not task:
             return jsonify({"error": "Task not found"}), 404
 
-        if task:
-            if current_user.id != task.character_id:
-                return jsonify({"error": "User not authorized"}), 403
+        # if task:
+        #     if current_user.id != task.character_id:
+        #         return jsonify({"error": "User not authorized"}), 403
 
         db.session.delete(task)
         db.session.commit()

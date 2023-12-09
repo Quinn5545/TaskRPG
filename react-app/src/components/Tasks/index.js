@@ -19,14 +19,18 @@ export default function Tasks() {
   const character = useSelector((state) => state.characters);
 
   // console.log("char", Object.keys(character).length);
-  // console.log(allTasks.length);
+  // console.log("allTasks", allTasks);
+  // console.log(character);
   useEffect(() => {
-    dispatch(getTasksThunk());
+    if (Object.keys(character).length) {
+      // console.log("inside---->", character);
+      dispatch(getTasksThunk(character.id));
+    }
     dispatch(getCharacterThunk(sessionUser.id));
-  }, [dispatch, allTasks.length]);
+  }, [dispatch, allTasks.length, Object.keys(character).length]);
 
   const handleCreateTask = (newTask) => {
-    dispatch(getTasksThunk());
+    dispatch(getTasksThunk(character.id));
   };
 
   // Filter tasks based on the active tab
@@ -35,6 +39,7 @@ export default function Tasks() {
       ? allTasks.filter((task) => task.completed)
       : allTasks.filter((task) => !task.completed);
 
+  // console.log(filteredTasks);
   return (
     <div className="tasks-container">
       {!Object.keys(character).length ? (

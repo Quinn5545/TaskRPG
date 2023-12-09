@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createTasksThunk, getTasksThunk } from "../../store/tasks";
 import "./NewTaskModal.css";
+import { getCharacterThunk } from "../../store/character";
 
 export default function NewTaskModal() {
   const sessionUser = useSelector((state) => state.session.user);
+  const characters = useSelector((state) => state.characters);
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+  console.log(characters);
   const [formData, setFormData] = useState({
+    character_id: characters.id,
     name: "",
     category: "",
     description: "",
@@ -18,6 +22,10 @@ export default function NewTaskModal() {
     completed: false,
   });
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    dispatch(getCharacterThunk(sessionUser.id));
+  }, [dispatch, sessionUser.id]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -69,7 +77,7 @@ export default function NewTaskModal() {
 
       // console.log(formData);
       await dispatch(createTasksThunk(formData));
-      await dispatch(getTasksThunk());
+      await dispatch(getTasksThunk(characters.id));
 
       closeModal();
     }

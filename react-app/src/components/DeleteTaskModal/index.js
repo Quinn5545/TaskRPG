@@ -7,15 +7,16 @@ import { deleteTasksThunk, getTasksThunk } from "../../store/tasks";
 
 export default function DeleteTaskModal({ task_id }) {
   const sessionUser = useSelector((state) => state.session.user);
+  const character = useSelector((state) => state.characters);
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  console.log(task_id);
+  // console.log(task_id);
+  // console.log(character);
 
   const handleDelete = async () => {
     try {
       await dispatch(deleteTasksThunk(task_id));
-      await dispatch(getTasksThunk());
       closeModal();
     } catch (error) {
       console.error("Error deleting task:", error);

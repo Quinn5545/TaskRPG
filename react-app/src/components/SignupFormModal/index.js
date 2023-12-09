@@ -11,13 +11,26 @@ function SignupFormModal() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+
+    const newErrors = {};
+    if (!email || !email.includes("@"))
+      newErrors.email = "Valid email is required";
+    if (!username) newErrors.username = "Username is required";
+    if (!password) newErrors.password = "Password is required";
+    if (!confirmPassword)
+      newErrors.confirmPassword = "Confirm Password is required";
+    if (confirmPassword !== password)
+      newErrors.match = "Passwords do not match";
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data);
@@ -25,10 +38,6 @@ function SignupFormModal() {
         closeModal();
         history.push("/dashboard");
       }
-    } else {
-      setErrors([
-        "Confirm Password field must be the same as the Password field",
-      ]);
     }
   };
 
@@ -37,9 +46,8 @@ function SignupFormModal() {
       <h1 className="signup-form-title">Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <ul className="signup-form-errors">
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
+          {/* General errors (not related to specific fields) */}
+          {errors.match && <li className="error-message">{errors.match}</li>}
         </ul>
         <label className="signup-form-label">
           Email
@@ -48,8 +56,8 @@ function SignupFormModal() {
             className="signup-form-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
+          {errors.email && <p className="error-message">{errors.email}</p>}
         </label>
         <label className="signup-form-label">
           Username
@@ -58,8 +66,10 @@ function SignupFormModal() {
             className="signup-form-input"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
           />
+          {errors.username && (
+            <p className="error-message">{errors.username}</p>
+          )}
         </label>
         <label className="signup-form-label">
           Password
@@ -68,8 +78,10 @@ function SignupFormModal() {
             className="signup-form-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
+          {errors.password && (
+            <p className="error-message">{errors.password}</p>
+          )}
         </label>
         <label className="signup-form-label">
           Confirm Password
@@ -78,8 +90,10 @@ function SignupFormModal() {
             className="signup-form-input"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
           />
+          {errors.confirmPassword && (
+            <p className="error-message">{errors.confirmPassword}</p>
+          )}
         </label>
         <button type="submit" className="signup-form-button">
           Sign Up

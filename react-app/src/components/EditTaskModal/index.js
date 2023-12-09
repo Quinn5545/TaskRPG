@@ -18,7 +18,7 @@ export default function EditTaskModal({ task_id }) {
   const previousTask = task[task_id];
   //   console.log(previousTask);
   const [formData, setFormData] = useState({
-    // character_id: sessionUser.id,
+    character_id: character.id,
     name: previousTask.name,
     category: previousTask.category,
     description: previousTask.description,
@@ -27,6 +27,8 @@ export default function EditTaskModal({ task_id }) {
     points: previousTask.priority,
     completed: previousTask.completed,
   });
+
+  // console.log("formdata======>", formData);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -83,12 +85,12 @@ export default function EditTaskModal({ task_id }) {
       if (formData.completed) {
         dispatch(editTasksThunk(task_id, formData));
         dispatch(addCharacterXpThunk(sessionUser.id, xp_to_add));
-        dispatch(getTasksThunk());
+        dispatch(getTasksThunk(character.id));
         closeModal();
         alert(`${formData.points} xp Added to ${character.name}!!`);
       } else {
         dispatch(editTasksThunk(task_id, formData));
-        dispatch(getTasksThunk());
+        dispatch(getTasksThunk(character.id));
         closeModal();
       }
     }

@@ -33,9 +33,9 @@ const deleteTasks = (tasks) => {
 };
 
 // Thunk
-export const getTasksThunk = () => async (dispatch) => {
+export const getTasksThunk = (character_id) => async (dispatch) => {
   try {
-    const res = await fetch(`/api/tasks`);
+    const res = await fetch(`/api/tasks/${character_id}`);
 
     if (res.ok) {
       const data = await res.json();
@@ -61,7 +61,7 @@ export const createTasksThunk = (taskData) => async (dispatch) => {
     if (res.ok) {
       const data = await res.json();
       //   console.log("data------>", data);
-      dispatch(createTasks());
+      dispatch(createTasks(data));
       return data;
     }
   } catch (error) {
@@ -97,7 +97,6 @@ export const deleteTasksThunk = (task_id) => async (dispatch) => {
     if (res.ok) {
       const data = await res.json();
       dispatch(deleteTasks(data));
-      dispatch(getTasks());
       return data;
     }
   } catch (error) {
@@ -130,7 +129,8 @@ const tasksReducer = (state = [], action) => {
 
     case DELETE_TASK:
       const newState = { ...state };
-      delete newState[action.task_id];
+      console.log("action------>", action);
+      delete newState[action.tasks.id];
       return newState;
 
     default:

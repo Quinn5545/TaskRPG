@@ -10,10 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getTasksThunk } from "../../store/tasks";
 import "./dashboard.css";
+import { getCharacterThunk } from "../../store/character";
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
   const allTasks = useSelector((state) => Object.values(state.tasks));
+  const characters = useSelector((state) => state.characters);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -25,9 +27,13 @@ export default function Dashboard() {
     start: task.due_date,
   }));
 
+  // console.log("chars====>", characters);
   useEffect(() => {
-    dispatch(getTasksThunk());
-  }, [dispatch]);
+    if (Object.keys(characters).length) {
+      dispatch(getTasksThunk(characters.id));
+    }
+    dispatch(getCharacterThunk(sessionUser.id));
+  }, [dispatch, Object.keys(characters).length]);
 
   if (!sessionUser) {
     history.push("/");
