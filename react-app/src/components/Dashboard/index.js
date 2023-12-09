@@ -20,12 +20,17 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   const filteredTasks = allTasks.filter((task) => !task.completed);
+  const events = [];
 
-  const events = filteredTasks.map((task) => ({
-    title: task.name,
-    content: task.description,
-    start: task.due_date,
-  }));
+  if (Object.keys(characters).length) {
+    const event = filteredTasks.map((task) => ({
+      title: task.name,
+      content: task.description,
+      start: task.due_date,
+    }));
+
+    events.push(...event);
+  }
 
   // console.log("chars====>", characters);
   useEffect(() => {
@@ -33,7 +38,7 @@ export default function Dashboard() {
       dispatch(getTasksThunk(characters.id));
     }
     dispatch(getCharacterThunk(sessionUser.id));
-  }, [dispatch, Object.keys(characters).length]);
+  }, [dispatch, Object.keys(characters).length, allTasks.length]);
 
   if (!sessionUser) {
     history.push("/");

@@ -10,7 +10,7 @@ export default function NewTaskModal() {
   const characters = useSelector((state) => state.characters);
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  console.log(characters);
+  // console.log(characters);
   const [formData, setFormData] = useState({
     character_id: characters.id,
     name: "",
