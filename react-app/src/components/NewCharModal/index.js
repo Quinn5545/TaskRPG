@@ -36,6 +36,8 @@ export default function NewCharModal() {
 
         <div>
           <p>Select a Character Model:</p>
+        </div>
+        <div>
           <div className="new-icon-select">
             {models.map((model) => (
               <div

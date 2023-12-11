@@ -17,7 +17,7 @@ export default function NewTaskModal() {
     category: "",
     description: "",
     due_date: "",
-    priority: "",
+    priority: "0",
     points: "",
     completed: false,
   });
@@ -137,17 +137,16 @@ export default function NewTaskModal() {
           )}
         </label>
         <label className="form-label">
-          Priority:
+          Priority: <span>{formData.priority}</span>
           <input
             type="range"
             name="priority"
-            min="1"
+            min="0"
             max="10"
             value={formData.priority}
             onChange={handleChange}
             className="form-slider"
           />
-          <span>{formData.priority}</span>
           {errors.priority && (
             <p className="error-message">{errors.priority}</p>
           )}
@@ -163,6 +162,8 @@ export default function NewTaskModal() {
           />
           {errors.points && <p className="error-message">{errors.points}</p>}
         </label> */}
+
+        {/*
         <label className="form-label">
           Completed:
           <input
@@ -172,7 +173,8 @@ export default function NewTaskModal() {
             onChange={handleChange}
             className="form-checkbox"
           />
-        </label>
+        </label> */}
+
         <button type="submit" className="submit-button">
           Create Task
         </button>

@@ -1,14 +1,24 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { Link } from "react-router-dom";
 import "./Landing.css";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { getModelsThunk } from "../../store/models";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Landing() {
   const sessionUser = useSelector((state) => state.session.user);
-  console.log(sessionUser);
+  const models = useSelector((state) => state.models.models);
+  const dispatch = useDispatch();
+
+  // console.log(models);
+
+  useEffect(() => {
+    dispatch(getModelsThunk());
+  }, [dispatch, sessionUser]);
+
   return (
     <div className="landing-container">
       <header>
@@ -44,22 +54,61 @@ export default function Landing() {
               ></OpenModalButton>
             </div>
           </section>
+          <section className="models-section">
+            <h2>Characters to Choose From!</h2>
+            <div className="models-container">
+              {models &&
+                models.map((model) => (
+                  // console.log("model---->", model),
+                  <div key={model.id} className="model-card">
+                    <img src={model.image_url} alt={model.name} />
+                  </div>
+                ))}
+            </div>
+          </section>
         </main>
       ) : (
         <div className="button-box">
-          <div>
-            <Link to="dashboard">
-              <button>Dashboard</button>
-            </Link>
-          </div>
-          <div>
-            <Link to={`/character/${sessionUser.id}`}>
-              <button>Character</button>
-            </Link>
-          </div>
+          <Link to="dashboard" className="dashboard-button">
+            Dashboard
+          </Link>
+          <Link
+            to={`/character/${sessionUser.id}`}
+            className="character-button"
+          >
+            Character
+          </Link>
+          <section className="models-section">
+            <h2>Characters to Choose From!</h2>
+            <div className="models-container">
+              {models &&
+                models.map((model) => (
+                  // console.log("model---->", model),
+                  <div key={model.id} className="model-card">
+                    <img src={model.image_url} alt={model.name} />
+                  </div>
+                ))}
+            </div>
+          </section>
         </div>
       )}
-      <footer>{/*//TODO add credits here */}</footer>
+      <footer>
+        <div>
+          Created By: Quinlan Bush
+          <div>
+            <a href="https://www.linkedin.com/in/quinlan-bush/">LinkedIn</a>
+          </div>
+          <div>
+            <a href="https://github.com/Quinn5545">GitHub</a>
+          </div>
+          <div>
+            Art Created By:{" "}
+            <span>
+              <a href="https://kytsune.artstation.com/">Artist</a>
+            </span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

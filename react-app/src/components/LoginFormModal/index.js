@@ -29,15 +29,12 @@ function LoginFormModal() {
     setPassword("password");
   };
 
+  // console.log(errors);
+
   return (
     <div className="login-form-container">
       <h1 className="login-form-title">Log In</h1>
       <form onSubmit={handleSubmit}>
-        <ul className="login-form-errors">
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
         <label className="login-form-label">
           Email
           <input
@@ -45,8 +42,14 @@ function LoginFormModal() {
             className="login-form-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
+          {errors.length > 0 &&
+            errors.map(
+              (error) =>
+                error.includes("email") && (
+                  <div className="login-err-msg">{error}</div>
+                )
+            )}
         </label>
         <label className="login-form-label">
           Password
@@ -55,8 +58,14 @@ function LoginFormModal() {
             className="login-form-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
+          {errors.length > 0 &&
+            errors.map(
+              (error) =>
+                error.includes("password") && (
+                  <div className="login-err-msg">{error}</div>
+                )
+            )}
         </label>
         <button type="submit" className="login-form-button">
           Log In

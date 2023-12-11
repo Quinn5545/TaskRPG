@@ -154,7 +154,7 @@ export default function EditTaskModal({ task_id }) {
           )}
         </label>
         <label className="form-label">
-          Priority:
+          Priority: <span>{formData.priority}</span>
           <input
             type="range"
             name="priority"
@@ -164,7 +164,6 @@ export default function EditTaskModal({ task_id }) {
             onChange={handleChange}
             className="form-slider"
           />
-          <span>{formData.priority}</span>
           {errors.priority && (
             <p className="error-message">{errors.priority}</p>
           )}

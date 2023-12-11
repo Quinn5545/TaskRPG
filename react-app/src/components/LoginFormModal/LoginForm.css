@@ -64,3 +64,8 @@
 .delete-LM-form-button:hover {
   background-color: #5f1fc5;
 }
+
+.login-err-msg {
+  font-size: 14px;
+  color: red;
+}
