@@ -10,12 +10,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getTasksThunk } from "../../store/tasks";
 import "./dashboard.css";
-import { getCharacterThunk } from "../../store/character";
+import {
+  getAllCharactersThunk,
+  getCharacterThunk,
+} from "../../store/character";
 
 export default function Dashboard() {
   const sessionUser = useSelector((state) => state.session.user);
   const allTasks = useSelector((state) => Object.values(state.tasks));
   const characters = useSelector((state) => state.characters);
+  // const allCharacters = useSelector((state) => state.characters);
+  console.log("char---->", characters);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -38,6 +43,7 @@ export default function Dashboard() {
       dispatch(getTasksThunk(characters.id));
     }
     dispatch(getCharacterThunk(sessionUser.id));
+    dispatch(getAllCharactersThunk());
   }, [dispatch, Object.keys(characters).length, allTasks.length]);
 
   if (!sessionUser) {
@@ -53,6 +59,24 @@ export default function Dashboard() {
         </div>
         <div className="dashboard-task-link">
           <NavLink to={`/tasks`}>Tasks</NavLink>
+        </div>
+        <div>
+          <div className="leaderboard-title">Leaderboards</div>
+          <ol>
+            {characters[0]
+              ?.sort((a, b) => b.level - a.level)
+              .slice(0, 10)
+              .map((character) => (
+                <li
+                  key={character.id}
+                  className={
+                    character.creator_id === sessionUser.id ? "userChar" : ""
+                  }
+                >
+                  {character.name}, level: {character.level}
+                </li>
+              ))}
+          </ol>
         </div>
       </div>
 

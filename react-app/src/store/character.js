@@ -3,12 +3,20 @@ const CREATE_NEW_CHARACTER = "characters/newCharacter";
 const EDIT_CHARACTER = "characters/editCharacter";
 const DELETE_CHARACTER = "characters/deleteCharacter";
 const ADD_CHARACTER_XP = "characters/addCharacterXp";
+const GET_ALL_CHARACTERS = "characters/getAllCharacters";
 
 // Action Creator
 const getCharacter = (character) => {
   return {
     type: GET_CHARACTER,
     character,
+  };
+};
+
+const getAllCharacters = (characters) => {
+  return {
+    type: GET_ALL_CHARACTERS,
+    characters,
   };
 };
 
@@ -49,6 +57,22 @@ export const getCharacterThunk = (creator_id) => async (dispatch) => {
     if (res.ok) {
       const data = await res.json();
       dispatch(getCharacter(data));
+      return data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getAllCharactersThunk = () => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/character/all`);
+
+    // console.log("res------>", res);
+
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(getAllCharacters(data));
       return data;
     }
   } catch (error) {
@@ -141,6 +165,11 @@ const characterReducer = (state = {}, action) => {
     case GET_CHARACTER: {
       const newState = { ...state, ...action.character };
       //   console.log("action ====>", action);
+      return newState;
+    }
+    case GET_ALL_CHARACTERS: {
+      const newState = { ...state, ...[action.characters] };
+      // console.log("action ====>", action);
       return newState;
     }
     case CREATE_NEW_CHARACTER: {

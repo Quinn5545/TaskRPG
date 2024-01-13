@@ -53,6 +53,24 @@ def get_character_details(creator_id):
     return jsonify(character.to_dict())
 
 
+@character_routes.route("/all")
+@login_required
+def get_all_characters():
+    """Gets all characters for leaderboard"""
+
+    characters = Character.query.all()
+
+    # print("chars----->", characters)
+
+    if not characters:
+        return jsonify({"error": "Character not found"}), 404
+
+    # Convert the characters to a list of dictionaries
+    characters_list = [character.to_dict() for character in characters]
+
+    return jsonify(characters_list)
+
+
 @character_routes.route("/<int:creator_id>/edit", methods=["PUT"])
 @login_required
 def edit_character(creator_id):
