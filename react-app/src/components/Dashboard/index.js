@@ -61,7 +61,7 @@ export default function Dashboard() {
           <NavLink to={`/tasks`}>Tasks</NavLink>
         </div>
         <div>
-          <div className="leaderboard-title">Leaderboards</div>
+          <div className="leaderboard-title">Leaderboard:</div>
           <ol>
             {characters[0]
               ?.sort((a, b) => b.level - a.level)

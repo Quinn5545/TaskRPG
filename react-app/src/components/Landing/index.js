@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import "./Landing.css";
 import { getModelsThunk } from "../../store/models";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import DemoUserModal from "../DemoUserModal";
 
 export default function Landing() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -31,7 +32,7 @@ export default function Landing() {
             <p>
               Embark on a journey of productivity and self-improvement with
               TaskRPG. Complete tasks and level up your character as you achieve
-              your goals. Turn your to-do list into an epic adventure!
+              your goals!
             </p>
           </section>
           <section className="get-started-section">
@@ -51,6 +52,11 @@ export default function Landing() {
                 className="login-button"
                 buttonText={"Log In"}
                 modalComponent={<LoginFormModal />}
+              ></OpenModalButton>
+              <OpenModalButton
+                className="demo-button"
+                buttonText={"Demo User"}
+                modalComponent={<DemoUserModal />}
               ></OpenModalButton>
             </div>
           </section>
